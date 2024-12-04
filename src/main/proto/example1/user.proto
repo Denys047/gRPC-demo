@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package v1;
+
+option java_package = "com.example.grpc.proto.user.v1";
+
+message User {
+  string name = 1;
+
+  int32 age = 2;
+}
