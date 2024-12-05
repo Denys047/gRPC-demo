@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpc.proto.mapList";
+option java_multiple_files = true;
+
+
+// Java == Map<Long, List<T2>>;
+message T1{
+  map<uint64, T2> m = 1;
+}
+
+message T2{
+  repeated T3 list = 1;
+}
+
+message T3{
+  string name = 1;
+  uint32 year = 2;
+}
