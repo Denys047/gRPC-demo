@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "example9/enum.proto";
+option java_package = "org.example.grpc.proto.oneof";
+option java_multiple_files = true;
+
+
+message Email{
+  string value = 1;
+}
+
+message Phone{
+  string value = 2 [deprecated = true];
+}
+
+message Authntication{
+
+  oneof auth  {
+    Email email = 1;
+    Phone phone = 2;
+  }
+
+}
+
+message User{
+  string password = 1;
+  string username = 2;
+  Authntication auth = 3;
+}
