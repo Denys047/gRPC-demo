@@ -15,6 +15,7 @@
         <tomcat.annotations.version>6.0.53</tomcat.annotations.version>
         <os.maven.plugin.version>1.7.1</os.maven.plugin.version>
         <protobuf.maven.plugin.version>0.6.1</protobuf.maven.plugin.version>
+        <junit.version>5.11.3</junit.version>
     </properties>
 
     <dependencies>
@@ -38,6 +39,18 @@
             <artifactId>annotations-api</artifactId>
             <version>${tomcat.annotations.version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
