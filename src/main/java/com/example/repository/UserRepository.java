@@ -2,7 +2,9 @@ package com.example.repository;
 
 import com.example.model.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserRepository {
@@ -21,6 +23,10 @@ public class UserRepository {
             return db.get(id);
         }
         throw new RuntimeException("user not found");
+    }
+
+    public List<User> getAllUsers() {
+        return new ArrayList<>(db.values());
     }
 
 }

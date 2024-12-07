@@ -5,6 +5,8 @@ package service;
 option java_multiple_files = true;
 option java_package = "com.grpc.proto.service.user";
 
+import "google/protobuf/empty.proto";
+
 message UserRequest {
   int64 id = 1;
 }
@@ -15,6 +17,14 @@ message UserResponse {
   string email = 3;
 }
 
+message AllUsersResponse{
+  repeated UserResponse user_response = 1;
+}
+
 service UserService {
+  //unary
   rpc GetUser(UserRequest) returns (UserResponse);
+
+  //unary
+  rpc GetAllUser(google.protobuf.Empty) returns(AllUsersResponse);
 }

@@ -26,4 +26,8 @@ public class GrpcServer {
         server.awaitTermination();
     }
 
+    public void stop() {
+        server.shutdownNow();
+    }
+
 }
