@@ -29,6 +29,33 @@ message AllUsersResponse{
 
 }
 
+message UserRequest{
+
+  int64 origin = 1;
+
+  int64 bound = 2;
+
+}
+
+message RandomNumber{
+
+  int64 number = 1;
+
+}
+
+message SumNumbersRequest{
+
+  uint64 number = 1;
+
+}
+
+message SumNumbersResponse {
+
+  uint64 result = 1;
+
+}
+
+
 enum Role {
 
   DEFAULT = 0;
@@ -41,9 +68,15 @@ enum Role {
 
 service UserService {
 
+  //unary
   rpc GetUserById (FindUserByIdRequest) returns (UserResponse);
+  rpc GetAllUsers (google.protobuf.Empty) returns (AllUsersResponse);
 
-  rpc GetAllUsers (google.protobuf.Empty) returns(AllUsersResponse);
+  //server-streaming
+  rpc Withdraw(UserRequest) returns (stream RandomNumber);
+
+  //client-streaming
+  rpc Sum(stream SumNumbersRequest) returns(SumNumbersResponse);
 
 }
 

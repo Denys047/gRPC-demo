@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 public class ResponseObserver<T> implements StreamObserver<T> {
 
@@ -52,9 +51,9 @@ public class ResponseObserver<T> implements StreamObserver<T> {
     }
 
     public void await() {
-        try{
-            latch.await(5, TimeUnit.SECONDS);
-        }catch (Exception e) {
+        try {
+            latch.await();
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
