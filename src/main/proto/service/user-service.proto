@@ -5,6 +5,8 @@ package grpc.service;
 option java_package = "com.grpc.service";
 option java_multiple_files = true;
 
+import "google/protobuf/empty.proto";
+
 message FindUserByIdRequest {
 
   uint64 id = 1;
@@ -21,6 +23,12 @@ message UserResponse {
 
 }
 
+message AllUsersResponse{
+
+  repeated UserResponse users = 1;
+
+}
+
 enum Role {
 
   DEFAULT = 0;
@@ -34,6 +42,8 @@ enum Role {
 service UserService {
 
   rpc GetUserById (FindUserByIdRequest) returns (UserResponse);
+
+  rpc GetAllUsers (google.protobuf.Empty) returns(AllUsersResponse);
 
 }
 

@@ -3,9 +3,7 @@ package com.example.repository;
 import com.example.model.Role;
 import com.example.model.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class UserRepository {
 
@@ -22,6 +20,10 @@ public class UserRepository {
 
     public Optional<User> findById(Long id) {
         return Optional.ofNullable(db.get(id));
+    }
+
+    public List<User> findAll() {
+        return new ArrayList<>(db.values());
     }
 
 }

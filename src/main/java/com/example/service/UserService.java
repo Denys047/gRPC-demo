@@ -2,10 +2,8 @@ package com.example.service;
 
 import com.example.model.User;
 import com.example.repository.UserRepository;
-import com.grpc.service.FindUserByIdRequest;
-import com.grpc.service.Role;
-import com.grpc.service.UserResponse;
-import com.grpc.service.UserServiceGrpc;
+import com.google.protobuf.Empty;
+import com.grpc.service.*;
 import io.grpc.stub.StreamObserver;
 
 public class UserService extends UserServiceGrpc.UserServiceImplBase {
@@ -23,6 +21,15 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
                     responseObserver.onNext(userModelToGrpcModel(user));
                     responseObserver.onCompleted();
                 }, () -> responseObserver.onError(new RuntimeException("User not found")));
+    }
+
+    @Override
+    public void getAllUsers(Empty request, StreamObserver<AllUsersResponse> responseObserver) {
+        responseObserver.onNext(AllUsersResponse
+                .newBuilder()
+                .addAllUsers(userRepository.findAll().stream().map(this::userModelToGrpcModel).toList())
+                .build());
+        responseObserver.onCompleted();
     }
 
     private UserResponse userModelToGrpcModel(User user) {
