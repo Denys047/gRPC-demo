@@ -5,12 +5,9 @@ import com.example.repository.UserRepository;
 import com.example.service.handler.SumNumberHandler;
 import com.example.utility.RandomNumberGenerator;
 import com.example.utility.SumNumber;
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.protobuf.Empty;
 import com.grpc.service.*;
 import io.grpc.stub.StreamObserver;
-
-import java.util.concurrent.TimeUnit;
 
 public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
