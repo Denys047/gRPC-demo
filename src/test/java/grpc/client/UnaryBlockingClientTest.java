@@ -13,7 +13,7 @@ public class UnaryBlockingClientTest extends AbstractTest {
     void getUserByIdRequestThenReturnUserResponse() {
         FindUserByIdRequest request = FindUserByIdRequest.newBuilder().setId(1).build();
 
-        var response = stub.getUserById(request);
+        var response = userServiceBlockingStub.getUserById(request);
 
         assertNotNull(response);
     }
@@ -22,7 +22,7 @@ public class UnaryBlockingClientTest extends AbstractTest {
     void getAllUsersRequestThenReturnAllUserResponse() {
         var request = Empty.newBuilder().build();
 
-        var response = stub.getAllUsers(request);
+        var response = userServiceBlockingStub.getAllUsers(request);
 
         assertNotNull(response);
         var expected = 5;

@@ -14,7 +14,7 @@ public class ClientStreamingTest extends AbstractTest {
     @Test
     void test() {
         var responseObserver = ResponseObserver.<SumNumbersResponse>create();
-        var requestObserver = this.asyncStub.sum(responseObserver);
+        var requestObserver = this.userServiceAsyncStub.sum(responseObserver);
 
         IntStream.rangeClosed(1, 10)
                 .mapToObj(i -> SumNumbersRequest.newBuilder().setNumber(i).build())

@@ -16,7 +16,7 @@ public class ServerStreamingClientTest extends AbstractTest {
     @Test
     void whenUserSendRequestThenReturnRandomNumbersBlockingStub() {
         var request = UserRequest.newBuilder().setBound(10).setOrigin(1).build();
-        Iterator<RandomNumber> iterator = stub.withdraw(request);
+        Iterator<RandomNumber> iterator = userServiceBlockingStub.withdraw(request);
 
         int count = 0;
         while (iterator.hasNext()) {
@@ -31,7 +31,7 @@ public class ServerStreamingClientTest extends AbstractTest {
         var request = UserRequest.newBuilder().setBound(10).setOrigin(1).build();
         ResponseObserver<RandomNumber> responseObserver = ResponseObserver.create();
 
-        asyncStub.withdraw(request, responseObserver);
+        userServiceAsyncStub.withdraw(request, responseObserver);
         responseObserver.await();
 
         assertEquals(10, responseObserver.getList().size());

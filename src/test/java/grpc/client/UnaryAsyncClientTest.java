@@ -16,7 +16,7 @@ public class UnaryAsyncClientTest extends AbstractTest {
         var request = FindUserByIdRequest.newBuilder().setId(1L).build();
         ResponseObserver<UserResponse> streamObserver = ResponseObserver.create();
 
-        asyncStub.getUserById(request, streamObserver);
+        userServiceAsyncStub.getUserById(request, streamObserver);
         streamObserver.await();
 
         assertEquals(1, streamObserver.getList().size());
@@ -29,7 +29,7 @@ public class UnaryAsyncClientTest extends AbstractTest {
         var request = Empty.newBuilder().build();
         ResponseObserver<AllUsersResponse> streamObserver = ResponseObserver.create(5);
 
-        asyncStub.getAllUsers(request,streamObserver);
+        userServiceAsyncStub.getAllUsers(request,streamObserver);
         streamObserver.await();
 
         assertEquals(5,streamObserver.getList().getFirst().getUsersList().size());
