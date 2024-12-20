@@ -13,4 +13,8 @@ public final class RandomNumberGenerator {
         return RANDOM.nextLong(origin, bound);
     }
 
+    public static int generateInt(int origin, int bound) {
+        return RANDOM.nextInt(origin, bound);
+    }
+
 }
