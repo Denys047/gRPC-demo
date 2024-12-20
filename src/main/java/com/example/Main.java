@@ -1,12 +1,10 @@
 package com.example;
 
 import com.example.repository.AccountRepository;
+import com.example.repository.ProductRepository;
 import com.example.repository.UserRepository;
 import com.example.server.GrpcServer;
-import com.example.service.FlowControlService;
-import com.example.service.GuessService;
-import com.example.service.TransferService;
-import com.example.service.UserService;
+import com.example.service.*;
 
 import java.util.List;
 
@@ -16,7 +14,8 @@ public class Main {
         GrpcServer.create(List.of(new UserService(new UserRepository()),
                 new TransferService(new AccountRepository()),
                 new FlowControlService(),
-                new GuessService())).start().await();
+                new GuessService(),
+                new ProductService(new ProductRepository()))).start().await();
     }
 
 }

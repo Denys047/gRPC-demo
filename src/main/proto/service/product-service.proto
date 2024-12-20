@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package grpc.service;
+
+option java_multiple_files = true;
+option java_package = "com.grpc.service";
+
+
+service ProductService{
+  rpc GetProduct(ProductRequest) returns(ProductResponse);
+  rpc GetProductByName(FindProductByNameRequest) returns(stream ProductResponse);
+}
+
+message ProductRequest{
+  int32 id = 1;
+}
+
+message FindProductByNameRequest{
+  string name = 1;
+}
+
+message ProductResponse{
+  int32 id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+enum ValidationCode{
+  INVALID_PRODUCT_ID = 0;
+  INVALID_PRODUCT_NAME = 1;
+}
+
+message ErrorMessage{
+  ValidationCode validation_code = 1;
+}
