@@ -54,9 +54,9 @@ public final class RequestValidator {
     private static Metadata toMetadata(ValidationCode code) {
         var metadata = new Metadata();
         var value = ErrorMessage.newBuilder().setValidationCode(code).build();
-        var key = Metadata.Key.of("description", Metadata.ASCII_STRING_MARSHALLER);
-//        metadata.put(ERROR_MESSAGE_KEY, value);
-        metadata.put(key, code.name());
+//        var key = Metadata.Key.of("description", Metadata.ASCII_STRING_MARSHALLER);
+//        metadata.put(key, code.name());
+        metadata.put(ERROR_MESSAGE_KEY, value);
         return metadata;
     }
 
