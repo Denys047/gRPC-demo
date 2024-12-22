@@ -15,7 +15,8 @@ public class Main {
                 new TransferService(new AccountRepository()),
                 new FlowControlService(),
                 new GuessService(),
-                new ProductService(new ProductRepository()))).start().await();
+                new ProductService(new ProductRepository()),
+                new DeadlineService())).start().await();
     }
 
 }

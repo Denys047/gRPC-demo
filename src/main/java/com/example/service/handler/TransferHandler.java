@@ -27,9 +27,9 @@ public class TransferHandler implements StreamObserver<TransferRequest> {
 
         responseObserver
                 .onNext(TransferResponse.newBuilder()
-                .setFromAccount(ProtoConverter.accountModelToProtoModel(accountFromDb))
-                .setToAccount(ProtoConverter.accountModelToProtoModel(accountToDb))
-                .setStatus(TransferStatus.valueOf(transferStatus.name())).build());
+                        .setFromAccount(ProtoConverter.accountModelToProtoModel(accountFromDb))
+                        .setToAccount(ProtoConverter.accountModelToProtoModel(accountToDb))
+                        .setStatus(TransferStatus.valueOf(transferStatus.name())).build());
     }
 
     @Override
@@ -43,7 +43,6 @@ public class TransferHandler implements StreamObserver<TransferRequest> {
     }
 
     private TransferStatusModel status(TransferRequest value) {
-        TransferStatusModel transferStatusModel;
         var accountFromId = value.getFromAccount();
         var accountToId = value.getToAccount();
 
@@ -52,12 +51,10 @@ public class TransferHandler implements StreamObserver<TransferRequest> {
 
         if ((accountFromDb.getAmount() >= value.getAmount()) && (accountFromId != accountToId)) {
             accountRepository.transferAccount(accountFromDb, accountToDb, value.getAmount());
-            transferStatusModel = TransferStatusModel.COMPLETED;
-        } else {
-            transferStatusModel = TransferStatusModel.REJECTED;
+            return TransferStatusModel.COMPLETED;
         }
 
-        return transferStatusModel;
+        return TransferStatusModel.REJECTED;
     }
 
 }

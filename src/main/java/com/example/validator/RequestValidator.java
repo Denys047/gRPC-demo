@@ -40,6 +40,12 @@ public final class RequestValidator {
                 Optional.empty();
     }
 
+    public static Optional<StatusRuntimeException> validateIdMetadata(long id) {
+        return id < 1 ?
+                Optional.of(Status.INVALID_ARGUMENT.asRuntimeException(toMetadata(ValidationCode.INVALID_PRODUCT_ID))) :
+                Optional.empty();
+    }
+
     public static Optional<StatusRuntimeException> validateProductNameMetadata(String productName) {
         var metadata = toMetadata(ValidationCode.INVALID_PRODUCT_NAME);
         if (productName == null || productName.isBlank()) {

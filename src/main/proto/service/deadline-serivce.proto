@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.grpc.service;
+
+option java_multiple_files = true;
+option java_package = "com.grpc.service";
+
+
+service DeadlineService{
+  rpc GetMessage(DeadlineRequest) returns(DeadlineResponse);
+  rpc GetStreamOfMessage(DeadlineRequest) returns(stream DeadlineResponse);
+}
+
+message DeadlineRequest{
+  int64 id = 1;
+}
+
+message DeadlineResponse{
+  int64 id = 1;
+  string message = 2;
+}

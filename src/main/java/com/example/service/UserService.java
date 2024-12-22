@@ -7,6 +7,7 @@ import com.example.utility.RandomNumberGenerator;
 import com.example.utility.SumNumber;
 import com.google.protobuf.Empty;
 import com.grpc.service.*;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class UserService extends UserServiceGrpc.UserServiceImplBase {
@@ -23,7 +24,7 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
                 .ifPresentOrElse(user -> {
                     responseObserver.onNext(ProtoConverter.userModelToProtoModel(user));
                     responseObserver.onCompleted();
-                }, () -> responseObserver.onError(new RuntimeException("User not found")));
+                }, () -> responseObserver.onError(Status.NOT_FOUND.withDescription("User not found").asException()));
     }
 
     @Override
@@ -50,7 +51,7 @@ public class UserService extends UserServiceGrpc.UserServiceImplBase {
 
     @Override
     public StreamObserver<SumNumbersRequest> sum(StreamObserver<SumNumbersResponse> responseObserver) {
-        return new SumNumberHandler(responseObserver,new SumNumber());
+        return new SumNumberHandler(responseObserver, new SumNumber());
     }
 
 }
