@@ -4,14 +4,8 @@ import com.example.repository.AccountRepository;
 import com.example.repository.ProductRepository;
 import com.example.repository.UserRepository;
 import com.example.server.GrpcServer;
-import com.example.service.DeadlineService;
-import com.example.service.ProductService;
-import com.example.service.TransferService;
-import com.example.service.UserService;
-import com.grpc.service.DeadlineServiceGrpc;
-import com.grpc.service.ProductServiceGrpc;
-import com.grpc.service.TransferServiceGrpc;
-import com.grpc.service.UserServiceGrpc;
+import com.example.service.*;
+import com.grpc.service.*;
 import grpc.common.AbstractChannelTest;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,7 +18,8 @@ public abstract class AbstractTest extends AbstractChannelTest {
             new UserService(new UserRepository()),
             new TransferService(new AccountRepository()),
             new ProductService(new ProductRepository()),
-            new DeadlineService()));
+            new DeadlineService(),
+            new CallOptionsService()));
 
     protected UserServiceGrpc.UserServiceBlockingStub userServiceBlockingStub;
     protected UserServiceGrpc.UserServiceStub userServiceAsyncStub;
@@ -38,6 +33,9 @@ public abstract class AbstractTest extends AbstractChannelTest {
     protected DeadlineServiceGrpc.DeadlineServiceBlockingStub deadlineServiceBlockingStub;
     protected DeadlineServiceGrpc.DeadlineServiceStub deadlineServiceAsyncStub;
 
+    protected CallOptionsServiceGrpc.CallOptionsServiceBlockingStub callOptionsServiceBlockingStub;
+    protected CallOptionsServiceGrpc.CallOptionsServiceStub callOptionsServiceAsyncStub;
+
     @BeforeAll
     public void setup() {
         this.server.start();
@@ -49,6 +47,8 @@ public abstract class AbstractTest extends AbstractChannelTest {
         this.productServiceAsyncStub = ProductServiceGrpc.newStub(channel);
         this.deadlineServiceBlockingStub = DeadlineServiceGrpc.newBlockingStub(channel);
         this.deadlineServiceAsyncStub = DeadlineServiceGrpc.newStub(channel);
+        this.callOptionsServiceBlockingStub = CallOptionsServiceGrpc.newBlockingStub(channel);
+        this.callOptionsServiceAsyncStub = CallOptionsServiceGrpc.newStub(channel);
     }
 
     @AfterAll

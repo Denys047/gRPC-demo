@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.grpc.service;
+
+option java_multiple_files = true;
+option java_package = "com.grpc.service";
+
+service CallOptionsService{
+  rpc CallOptions(Request) returns(Response);
+}
+
+message Request{
+  string message = 1;
+}
+
+message Response{
+  string message = 1;
+  uint64 number = 2;
+}

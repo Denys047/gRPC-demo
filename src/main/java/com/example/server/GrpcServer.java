@@ -1,5 +1,7 @@
 package com.example.server;
 
+import com.example.service.interceptor.ApiKeyValidatorInterceptor;
+import com.example.service.interceptor.GzipResponseInterceptor;
 import io.grpc.BindableService;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -24,6 +26,8 @@ public class GrpcServer {
 
     public static GrpcServer create(int port, List<BindableService> serviceDefinitions) {
         var builder = ServerBuilder.forPort(port)
+                .intercept(new GzipResponseInterceptor())
+                .intercept(new ApiKeyValidatorInterceptor())
                 .addServices(serviceDefinitions.stream().map(BindableService::bindService).toList())
                 .build();
         return new GrpcServer(builder);
